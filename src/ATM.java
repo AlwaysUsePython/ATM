@@ -36,7 +36,7 @@ public class ATM {
 		Account newAccount = new Account(amount);
 		
 		
-		// Try to put the account in the hash map, if not then print an error message
+		// Try to put the account in the hash map, if not then print an error message --> will throw error if account already exists
 		try {
 			accounts.put(id, newAccount);
 		}
@@ -46,11 +46,12 @@ public class ATM {
 		
 	}
 
-	// 
 	public void depositMoney(Integer id, double amount) {
 		
+		// This rounding to the 100th's place forces the user to use cents - this way there won't be rounding errors.
 		amount = Math.round(amount*100.0)/100.0;
 		
+		// Try/Catch to make sure the account exists
 		try{
 			accounts.get(id).deposit(amount);
 		}
@@ -62,8 +63,10 @@ public class ATM {
 	
 	public void withdrawMoney(Integer id, double amount) {
 		
+		// Once again forcing the user to use cents.
 		amount = Math.round(amount*100.0)/100.0;
 		
+		// Try/Catch to make sure the account exists.
 		try{
 			accounts.get(id).withdraw(amount);
 		}
@@ -75,6 +78,7 @@ public class ATM {
 	
 	public double checkBalance(Integer id) {
 		
+		// Try/Catch to make sure the account exists
 		try{
 			double amount =  accounts.get(id).getBalance();
 			// This rounding to the 100th's place forces the user to use cents - this way there won't be rounding errors.
@@ -89,7 +93,9 @@ public class ATM {
 	
 	public void closeAccount(Integer id) {
 		
+		// Try/Catch to make sure the account exists
 		try{
+			// Check that it's legal to close
 			if (accounts.get(id).getBalance() != 0) {
 				System.out.println("Cannot close account because balance is not 0.");
 				return;

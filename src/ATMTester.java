@@ -40,5 +40,14 @@ public static void main(String[] args) {
 	// Test other issues
 	chase.withdrawMoney(00002, 2020.2);
 	System.out.println(chase.checkBalance(00002)); // Should be 634.1 and not a fraction more!
+	
+	chase.closeAccount(01337);
+	
+	System.out.println(chase.checkBalance(01337)); // Should show that account no longer exists
+	
+	chase.closeAccount(00001); // Shouldn't work because has nonzero balance
+	chase.checkBalance(00001); // Should work
+	
+	chase.closeAccount(05000); // Shouldn't work because account doesn't exist
 	}
 }
